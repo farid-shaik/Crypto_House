@@ -17,17 +17,25 @@ const CoinsTable = () => {
 
     const { currency, symbol } = CryptoState();
 
-    const fetchCoins = async () => {
+//     const fetchCoins = async () => {
+//         setLoading(true);
+//         const { data } = await axios.get(CoinList(currency));
+
+//         setCoins(data);
+//         setLoading(false);
+//     };
+
+    //console.log(coins)
+
+    useEffect(() => {
+        const fetchCoins = async () => {
         setLoading(true);
         const { data } = await axios.get(CoinList(currency));
 
         setCoins(data);
         setLoading(false);
     };
-
-    console.log(coins)
-
-    useEffect(() => {
+        
         fetchCoins();
     }, [currency]);
 
