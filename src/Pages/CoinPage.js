@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { SingleCoin } from "../config/api";
 import { CryptoState } from "../CryptoContext";
@@ -13,19 +13,26 @@ const CoinPage = () => {
   const { id } = useParams();
   const [coin, setCoin] = useState();
 
-  const { currency, symbol } = CryptoState();
+  const { currency, symbol, } = CryptoState();
 
-  const fetchCoin = async() => {
-    const { data } = await axios.get(SingleCoin(id))
+  // const fetchCoin = async() => {
+  //   const { data } = await axios.get(SingleCoin(id))
 
-    setCoin(data);
-  };
+  //   setCoin(data);
+  // };
 
-  console.log(coin);
+  // console.log(coin);
 
   useEffect(() => {
+
+    const fetchCoin = async() => {
+      const { data } = await axios.get(SingleCoin(id));
+
+      setCoin(data);
+    };
+
     fetchCoin();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const useStyles = makeStyles((theme) => ({
     container: {

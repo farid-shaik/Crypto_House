@@ -1,7 +1,7 @@
 import { Container, createTheme, LinearProgress, makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider, Typography } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { CoinList } from '../config/api';
 import { CryptoState } from '../CryptoContext';
@@ -17,7 +17,19 @@ const CoinsTable = () => {
 
     const { currency, symbol } = CryptoState();
 
-    const fetchCoins = async () => {
+    // const fetchCoins = async () => {
+    //     setLoading(true);
+    //     const { data } = await axios.get(CoinList(currency));
+
+    //     setCoins(data);
+    //     setLoading(false);
+    // };
+
+    // console.log(coins)
+
+    useEffect(() => {
+
+      const fetchCoins = async () => {
         setLoading(true);
         const { data } = await axios.get(CoinList(currency));
 
@@ -25,11 +37,14 @@ const CoinsTable = () => {
         setLoading(false);
     };
 
-    console.log(coins)
+    fetchCoins();
 
-    useEffect(() => {
-        fetchCoins();
     }, [currency]);
+
+    // useEffect(() => {
+      
+    // }, [third])
+    
 
     const darkTheme = createTheme({
         palette: {
